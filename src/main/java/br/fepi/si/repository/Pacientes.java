@@ -1,0 +1,41 @@
+package br.fepi.si.repository;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import br.fepi.si.model.Paciente;
+
+public class Pacientes implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	private EntityManager em;
+	
+	public Pacientes (EntityManager em) {
+		this.em = em;
+	}
+	
+	public Paciente pacienteId (Long matricula) {
+		return em.find(Paciente.class, matricula);
+	}
+	
+	public List<Paciente> todos(){
+		TypedQuery<Paciente> query = em.createQuery("from Paciente p order by p.matricula", Paciente.class);
+		return query.getResultList();
+	}
+	
+	public void adicionar (Paciente paciente) {
+		this.em.persist(paciente);
+	}
+	
+	public void guardar (Paciente paciente) {
+		this.em.merge(paciente);
+	}
+	
+	public void remover (Paciente paciente) {
+		this.em.remove(paciente);
+	}
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>			
+		<f:viewParam name="id" value="#{cadastroPacienteBean.paciente}"/>	
+		<f:viewAction action="#{cadastroPacienteBean.prepararCadastro}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Cadastro de Pacientes</title>
+	</h:head>
+		
+		<ui:define name="corpo">
+			<h2>Cadastro de Pacientes</h2>
+
+			<h:form>
+				<p:messages showDetail="false" showSummary="true"/>				
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Matricula" for="matricula" />
+					<p:inputText id="matricula" value="#{cadastroPacienteBean.paciente.matricula}" required="true" requiredMessage="Matrícula obrigatória"/>
+					
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" value="#{cadastroPacienteBean.paciente.nome}" required="true" requiredMessage="Nome obrigatório"/>
+					
+					<p:outputLabel value="Data Nascimento" for="dataNascimento" />
+					<p:calendar id="dataNascimento"
+					value="#{cadastroPacienteBean.paciente.dataNascimento}"
+					pattern="dd/MM/yyyy" required="true" />
+					
+					<p:outputLabel value="Grupo" for="grupo" />
+					<p:selectOneMenu id="grupo"
+					value="#{cadastroPacienteBean.paciente.grupo}" required="true">
+					<f:selectItems value="#{cadastroPacienteBean.grupoPaciente}"
+						var="grupo" itemValue="#{grupo}"
+						itemLabel="#{grupo.descricao}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Sexo" for="sexo" />
+					<p:selectOneMenu id="sexo"
+					value="#{cadastroPacienteBean.paciente.sexo}" required="true">
+					<f:selectItems value="#{cadastroPacienteBean.sexoPaciente}"
+						var="sexo" itemValue="#{sexo}"
+						itemLabel="#{sexo.descricao}" />
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Salvar" action="#{cadastroPacienteBean.salvar}" update="@form"/>
+				</p:panelGrid>
+			</h:form>
+		</ui:define>
+</ui:composition>

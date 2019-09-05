@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{cadastroLancamentoBean.lancamento}" />
+		<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Cadastro de Lançamentos</title>
+	</h:head>
+
+	<ui:define name="corpo">
+		<h2>Cadastro de Lançamentos</h2>
+
+		<h:form>
+			<p:messages showDetail="false" showSummary="true" />
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Tipo" for="tipo" />
+				<p:selectOneButton id="tipo"
+					value="#{cadastroLancamentoBean.lancamento.tipo}" required="true">
+					<f:selectItems value="#{cadastroLancamentoBean.tipoLancamento}"
+						var="tipoLancamento" itemValue="#{tipoLancamento}"
+						itemLabel="#{tipoLancamento.descricao}" />
+				</p:selectOneButton>
+				<p:outputLabel value="Pessoa" for="pessoa" />
+				<p:selectOneMenu id="pessoa" required="true"
+					value="#{cadastroLancamentoBean.lancamento.pessoa}" filter="true"
+					filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroLancamentoBean.todasPessoas}"
+						var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Descrição" for="descricao" />
+				<p:autoComplete
+					value="#{cadastroLancamentoBean.lancamento.descricao}"
+					id="descricao" required="true" minQueryLength="3" 
+					completeMethod="#{cadastroLancamentoBean.autoCompletaDescricao}"/>
+				<p:outputLabel value="Valor" for="valor" />
+				<p:inputText id="valor" required="true"
+					value="#{cadastroLancamentoBean.lancamento.valor}">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+						minFractionDigits="2" />
+				</p:inputText>
+				<p:outputLabel value="Data Vencimento" for="dataVencimento" />
+				<p:calendar id="dataVencimento"
+					value="#{cadastroLancamentoBean.lancamento.dataVencimento}"
+					pattern="dd/MM/yyyy" required="true" />
+				<p:outputLabel value="Data Pagamento" for="dataPagamento" />
+				<p:calendar id="dataPagamento"
+					value="#{cadastroLancamentoBean.lancamento.dataPagamento}"
+					pattern="dd/MM/yyyy" />
+				<p:outputLabel />
+				<p:commandButton value="Salvar"
+					action="#{cadastroLancamentoBean.salvar}" update="@form" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
