@@ -19,8 +19,8 @@ public class Medico implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long crm;
-	private String crmEstado;
 	private String nome;
+	private EstadoEnum crmEstado;
 	private EspecialidadesEnum especialidade;
 	private SexoEnum sexo;
 	private Date dataNascimento;
@@ -34,15 +34,16 @@ public class Medico implements Serializable {
 		this.crm = crm;
 	}
 	
-	@Column(nullable = false)
-	public String getCrmEstado() {
+	@Enumerated(EnumType.STRING)
+	@Column(name = "crm_estado", nullable = false)
+	public EstadoEnum getCrmEstado() {
 		return crmEstado;
 	}
-	
-	public void setCrmEstado(String crmEstado) {
+
+	public void setCrmEstado(EstadoEnum crmEstado) {
 		this.crmEstado = crmEstado;
 	}
-	
+
 	@Column(nullable = false)
 	public String getNome() {
 		return nome;

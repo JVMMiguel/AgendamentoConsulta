@@ -35,6 +35,7 @@
 					<p:outputLabel value="Grupo" for="grupo" />
 					<p:selectOneMenu id="grupo"
 					value="#{cadastroPacienteBean.paciente.grupo}" required="true">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroPacienteBean.grupoPaciente}"
 						var="grupo" itemValue="#{grupo}"
 						itemLabel="#{grupo.descricao}" />
@@ -43,6 +44,7 @@
 					<p:outputLabel value="Sexo" for="sexo" />
 					<p:selectOneMenu id="sexo"
 					value="#{cadastroPacienteBean.paciente.sexo}" required="true">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroPacienteBean.sexoPaciente}"
 						var="sexo" itemValue="#{sexo}"
 						itemLabel="#{sexo.descricao}" />

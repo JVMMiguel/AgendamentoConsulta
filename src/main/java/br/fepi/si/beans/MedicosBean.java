@@ -10,25 +10,25 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import br.fepi.si.model.Paciente;
-import br.fepi.si.negocio.CadastroPacientes;
-import br.fepi.si.repository.Pacientes;
+import br.fepi.si.model.Medico;
+import br.fepi.si.negocio.CadastroMedicos;
+import br.fepi.si.repository.Medicos;
 import br.fepi.si.util.DataSource;
 
 @ManagedBean
 @ViewScoped
-public class PacientesBean implements Serializable {
-
+public class MedicosBean implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
-	private List<Paciente> pacientes;
+	private List<Medico> medicos;
 	
-	private Paciente pacienteSelecionado;
+	private Medico medicoSelecionado;
 	
 	public void consultar() {
 		EntityManager em = DataSource.getEntityManager();
-		Pacientes pacientes = new Pacientes(em);
-		this.pacientes = pacientes.todos();
+		Medicos medicos = new Medicos(em);
+		this.medicos = medicos.todos();
 		em.close();
 	}
 	
@@ -38,12 +38,12 @@ public class PacientesBean implements Serializable {
 		EntityManager em = DataSource.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		
-		CadastroPacientes cadastro = new CadastroPacientes(new Pacientes(em));
+		CadastroMedicos cadastro = new CadastroMedicos(new Medicos(em));
 		
 		try {
 			et.begin();
-			cadastro.excluir(this.pacienteSelecionado);
-			context.addMessage(null, new FacesMessage("Paciente excluído com sucesso!"));
+			cadastro.excluir(this.medicoSelecionado);
+			context.addMessage(null, new FacesMessage("Médico excluído com sucesso!"));
 			et.commit();
 			this.consultar();
 			
@@ -57,15 +57,15 @@ public class PacientesBean implements Serializable {
 		}
 	}
 	
-	public List<Paciente> getPacientes() {
-		return pacientes;
+	public List<Medico> getMedicos(){
+		return medicos;
 	}
 	
-	public Paciente getPacienteSelecionado() {
-		return pacienteSelecionado;
+	public Medico getMedicoSelecionado() {
+		return medicoSelecionado;
 	}
 	
-	public void setPacienteSelecionado(Paciente pacienteSelecionado) {
-		this.pacienteSelecionado = pacienteSelecionado;
+	public void setMedicoSelecionado(Medico medicoSelecionado) {
+		this.medicoSelecionado = medicoSelecionado;
 	}
 }

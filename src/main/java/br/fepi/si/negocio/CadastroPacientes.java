@@ -19,7 +19,7 @@ public class CadastroPacientes implements Serializable {
 		this.pacientes.guardar(paciente);
 	}
 	
-	public void excluir (Paciente paciente) throws Exception{
+	public void excluir(Paciente paciente) throws Exception{
 		paciente = this.pacientes.pacienteId(paciente.getMatricula());
 		this.pacientes.remover(paciente);
 	}
