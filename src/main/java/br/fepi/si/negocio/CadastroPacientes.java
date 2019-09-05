@@ -3,6 +3,7 @@ package br.fepi.si.negocio;
 import java.io.Serializable;
 
 import br.fepi.si.model.Paciente;
+import br.fepi.si.negocio.exception.NegocioException;
 import br.fepi.si.repository.Pacientes;
 
 public class CadastroPacientes implements Serializable {
@@ -15,11 +16,11 @@ public class CadastroPacientes implements Serializable {
 		this.pacientes = pacientes;
 	}
 	
-	public void salvar(Paciente paciente) throws Exception{
+	public void salvar(Paciente paciente) throws NegocioException{
 		this.pacientes.guardar(paciente);
 	}
 	
-	public void excluir(Paciente paciente) throws Exception{
+	public void excluir(Paciente paciente) throws NegocioException{
 		paciente = this.pacientes.pacienteId(paciente.getMatricula());
 		this.pacientes.remover(paciente);
 	}

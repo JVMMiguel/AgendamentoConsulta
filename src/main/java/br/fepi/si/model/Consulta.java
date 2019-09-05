@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,6 +25,7 @@ public class Consulta implements Serializable {
 	private Date dataConsulta;
 	private Paciente paciente;
 	private Medico medico;
+	private ConsultaEnum tipoConsulta;
 	
 	@Id
 	@GeneratedValue
@@ -62,6 +65,16 @@ public class Consulta implements Serializable {
 	
 	public void setMedico(Medico medico) {
 		this.medico = medico;
+	}
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_consulta", nullable = false)
+	public ConsultaEnum getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(ConsultaEnum tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
 	}
 
 	@Override
