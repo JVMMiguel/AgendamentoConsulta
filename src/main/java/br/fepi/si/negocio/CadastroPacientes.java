@@ -1,6 +1,7 @@
 package br.fepi.si.negocio;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.fepi.si.model.Paciente;
 import br.fepi.si.negocio.exception.NegocioException;
@@ -17,6 +18,9 @@ public class CadastroPacientes implements Serializable {
 	}
 	
 	public void salvar(Paciente paciente) throws NegocioException{
+		if(paciente.getDataNascimento() != null && paciente.getDataNascimento().after(new Date())) {
+			throw new NegocioException("Data de nascimento não pode ser futura à data atual.");
+		}
 		this.pacientes.guardar(paciente);
 	}
 	
