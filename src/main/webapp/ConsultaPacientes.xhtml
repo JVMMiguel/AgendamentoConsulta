@@ -21,7 +21,8 @@
 			<p:dataTable value="#{pacientesBean.pacientes}" var="paciente"
 				border="2" paginator="true" rows="6" paginatorPosition="bottom">
 
-				<p:column headerText="Matrícula" width="15%" style="text-align: center">
+				<p:column headerText="Matrícula" width="10%"
+					style="text-align: center" sortBy="#{paciente.matricula}">
 					<h:outputText value="#{paciente.matricula}" />
 				</p:column>
 
@@ -29,24 +30,23 @@
 					<h:outputText value="#{paciente.nome}" />
 				</p:column>
 
-				<p:column headerText="Grupo" width="20%" sortBy="#{paciente.grupo}"
+				<p:column headerText="Grupo" width="12%" sortBy="#{paciente.grupo}"
 					style="text-align: center">
 					<h:outputText value="#{paciente.grupo.descricao}" />
 				</p:column>
 
-				<p:column headerText="Sexo" width="15%" sortBy="#{paciente.sexo}"
-					style="text-align: center">
+				<p:column headerText="Sexo" width="12%" style="text-align: center">
 					<h:outputText value="#{paciente.sexo.descricao}" />
 				</p:column>
 
 				<p:column headerText="Data Nascimento"
-					sortBy="#{paciente.dataNascimento}" style="text-align: center">
+					sortBy="#{paciente.dataNascimento}" style="text-align: center" width="15%">
 					<h:outputText value="#{paciente.dataNascimento}">
 						<f:convertDateTime pattern="dd/MM/yy" timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="Ações" width="15%" style="text-align: center">
+				<p:column headerText="Ações" width="10%" style="text-align: center">
 					<p:button title="Editar" outcome="/CadastroPacientes"
 						icon="ui-icon-pencil">
 						<f:param name="id" value="#{paciente.matricula}" />

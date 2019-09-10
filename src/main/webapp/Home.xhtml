@@ -5,9 +5,25 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="titulo">Boas vindas</ui:define>
+
 	<ui:define name="corpo">
-		<h2>Seja bem-vindo ao Sistema de Agendamento de Consultas</h2>	
+		<h2 align="center">
+			Seja bem-vindo(a) ao Sistema de Agendamento de Consultas! <br /> <br />
+		</h2>
+		<h:form>
+			<p:messages showDetail="false" showSummary="true" />
+			<div align="center">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Matricula" style="text-align: center" />
+					<p:inputText />
+					<p:outputLabel value="Senha" style="text-align: center" />
+					<p:password />
+					<p:commandButton value="Login" style="text-align: center" />
+				</p:panelGrid>
+			</div>
+			<br />
+		</h:form>
 	</ui:define>
 </ui:composition>

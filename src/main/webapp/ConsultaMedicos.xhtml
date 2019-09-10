@@ -18,40 +18,39 @@
 
 		<h:form>
 			<p:messages showDetail="false" showSummary="true" />
-			<p:dataTable value="#{medicosBean.medicos}" var="medico"
-				border="2" paginator="true" rows="7" paginatorPosition="bottom">
+			<p:dataTable value="#{medicosBean.medicos}" var="medico" border="2"
+				paginator="true" rows="7" paginatorPosition="bottom">
 
-				<p:column headerText="CRM" width="15%" style="text-align: center">
+				<p:column headerText="CRM" width="8%" style="text-align: center" sortBy="#{medico.crm}">
 					<h:outputText value="#{medico.crm}" />
 				</p:column>
-				
-				<p:column headerText="CRM Estado" width="20%" sortBy="#{medico.crmEstado}"
+
+				<p:column headerText="CRM Estado" width="11%"
 					style="text-align: center">
 					<h:outputText value="#{medico.crmEstado.descricao}" />
 				</p:column>
-				
+
 				<p:column headerText="Nome" sortBy="#{medico.nome}">
 					<h:outputText value="#{medico.nome}" />
 				</p:column>
-				
-				<p:column headerText="Especialidade" width="15%" sortBy="#{medico.especialidade}"
-					style="text-align: center">
+
+				<p:column headerText="Especialidade" width="12%"
+					sortBy="#{medico.especialidade}" style="text-align: center">
 					<h:outputText value="#{medico.especialidade.descricao}" />
 				</p:column>
-				
-				<p:column headerText="Data Nascimento"
-					sortBy="#{medico.dataNascimento}" style="text-align: center">
+
+				<p:column headerText="Data Nascimento" style="text-align: center"
+					width="15%">
 					<h:outputText value="#{medico.dataNascimento}">
 						<f:convertDateTime pattern="dd/MM/yy" timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
-				
-				<p:column headerText="Sexo" width="15%" sortBy="#{medico.sexo}"
-					style="text-align: center">
+
+				<p:column headerText="Sexo" width="10%" style="text-align: center">
 					<h:outputText value="#{medico.sexo.descricao}" />
 				</p:column>
 
-				<p:column headerText="Ações" width="15%" style="text-align: center">
+				<p:column headerText="Ações" width="10%" style="text-align: center">
 					<p:button title="Editar" outcome="/CadastroMedicos"
 						icon="ui-icon-pencil">
 						<f:param name="id" value="#{medico.crm}" />

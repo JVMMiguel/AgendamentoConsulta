@@ -16,10 +16,18 @@ public class CadastroMedicos implements Serializable {
 	public CadastroMedicos(Medicos medicos) {
 		this.medicos = medicos;
 	}
-
+	
+	/**
+	 * Não permite data de nascimento futura à data atual, não deixa cadastrar médico com o mesmo CRM.
+	 * @param medico
+	 * @throws NegocioException
+	 */
 	public void salvar(Medico medico) throws NegocioException {
 		if (medico.getDataNascimento() != null && medico.getDataNascimento().after(new Date())) {
 			throw new NegocioException("Data de nascimento não pode ser futura à data atual");
+		}
+		if ((medico.getCrm()) == (medicos.medicoCrm(medico.getCrm()).getCrm())) {
+			throw new NegocioException("Médico já cadastrado.");
 		}
 		this.medicos.guardar(medico);
 	}
