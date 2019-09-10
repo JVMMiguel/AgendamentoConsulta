@@ -21,6 +21,7 @@ public class Paciente implements Serializable{
 	private Long matricula;
 	private String nome;
 	private Date dataNascimento;
+	private String senha;
 	private GrupoEnum grupo;
 	private SexoEnum sexo;
 	
@@ -51,6 +52,15 @@ public class Paciente implements Serializable{
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+	@Column(name = "senha", nullable = false)
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Enumerated(EnumType.STRING)

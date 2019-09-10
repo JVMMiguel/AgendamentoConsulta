@@ -54,6 +54,20 @@
 						required="true" requiredMessage="Sexo obrigatório" />
 				</p:selectOneMenu>
 
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha"
+					value="#{cadastroPacienteBean.paciente.senha}" required="true"
+					requiredMessage="Senha obrigatória" feedback="true"
+					promptLabel="Entre com a sua senha"
+					weakLabel="Força da senha: fraca" goodLabel="Força da senha: média"
+					strongLabel="Força da senha: forte" match="confsenha"
+					validatorMessage="As senhas devem ser iguais" />
+
+				<p:outputLabel value="Repita a Senha" for="confsenha" />
+				<p:password id="confsenha"
+					value="#{cadastroPacienteBean.paciente.senha}" required="true"
+					requiredMessage="Repita a senha!" />
+
 				<p:commandButton value="Salvar"
 					action="#{cadastroPacienteBean.salvar}" update="@form" />
 			</p:panelGrid>

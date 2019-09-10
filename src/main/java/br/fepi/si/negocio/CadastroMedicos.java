@@ -26,9 +26,6 @@ public class CadastroMedicos implements Serializable {
 		if (medico.getDataNascimento() != null && medico.getDataNascimento().after(new Date())) {
 			throw new NegocioException("Data de nascimento não pode ser futura à data atual");
 		}
-		if ((medico.getCrm()) == (medicos.medicoCrm(medico.getCrm()).getCrm())) {
-			throw new NegocioException("Médico já cadastrado.");
-		}
 		this.medicos.guardar(medico);
 	}
 
