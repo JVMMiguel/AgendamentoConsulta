@@ -13,6 +13,7 @@ import br.fepi.si.model.GrupoEnum;
 import br.fepi.si.model.Paciente;
 import br.fepi.si.model.SexoEnum;
 import br.fepi.si.negocio.CadastroPacientes;
+import br.fepi.si.negocio.exception.NegocioException;
 import br.fepi.si.repository.Pacientes;
 import br.fepi.si.util.DataSource;
 
@@ -42,7 +43,7 @@ public class CadastroPacienteBean implements Serializable {
 			this.paciente = new Paciente();
 			faces.addMessage(null, new FacesMessage("Salvo com sucesso"));
 			et.commit();
-		} catch (Exception e) {
+		} catch (NegocioException e) {
 			et.rollback();
 			FacesMessage mensagem = new FacesMessage(e.getMessage());
 			mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);

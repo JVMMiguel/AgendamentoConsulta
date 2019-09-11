@@ -10,26 +10,31 @@ import br.fepi.si.repository.Pacientes;
 public class CadastroPacientes implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Pacientes pacientes;
-	
+
 	public CadastroPacientes(Pacientes pacientes) {
 		this.pacientes = pacientes;
 	}
-	
+
 	/**
-	 * Não permite data de nascimento futura à data atual, não deixa paciente cadastrar com a mesma matricula.
+	 * Não permite data de nascimento futura à data atual, não deixa paciente
+	 * cadastrar com a mesma matricula.
+	 * 
 	 * @param paciente
 	 * @throws NegocioException
 	 */
-	public void salvar(Paciente paciente) throws NegocioException{
-		if(paciente.getDataNascimento() != null && paciente.getDataNascimento().after(new Date())) {
+	public void salvar(Paciente paciente) throws NegocioException {
+		if (paciente.getMatricula() == pacientes.pacienteId(paciente.getMatricula()).getMatricula()) {
+			throw new NegocioException("Paciente já cadastrado.");
+		}
+		if (paciente.getDataNascimento() != null && paciente.getDataNascimento().after(new Date())) {
 			throw new NegocioException("Data de nascimento não pode ser futura à data atual.");
 		}
 		this.pacientes.guardar(paciente);
 	}
-	
-	public void excluir(Paciente paciente) throws NegocioException{
+
+	public void excluir(Paciente paciente) throws NegocioException {
 		paciente = this.pacientes.pacienteId(paciente.getMatricula());
 		this.pacientes.remover(paciente);
 	}
