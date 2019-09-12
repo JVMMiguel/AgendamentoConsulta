@@ -18,14 +18,15 @@ public class CadastroPacientes implements Serializable {
 	}
 
 	/**
-	 * Não permite data de nascimento futura à data atual, não deixa paciente
+	 * Não permite data de nascimento futura à data atual, não deixa paciente cadastrar com matrícula existente.
 	 * cadastrar com a mesma matricula.
 	 * 
 	 * @param paciente
 	 * @throws NegocioException
 	 */
 	public void salvar(Paciente paciente) throws NegocioException {
-		if (paciente.getMatricula() == pacientes.pacienteId(paciente.getMatricula()).getMatricula()) {
+		Paciente pacienteExistente = pacientes.pacienteId(paciente.getMatricula());
+		if(pacienteExistente != null && !pacienteExistente.equals(paciente.getMatricula())) {
 			throw new NegocioException("Paciente já cadastrado.");
 		}
 		if (paciente.getDataNascimento() != null && paciente.getDataNascimento().after(new Date())) {

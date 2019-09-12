@@ -23,8 +23,12 @@ public class CadastroMedicos implements Serializable {
 	 * @throws NegocioException
 	 */
 	public void salvar(Medico medico) throws NegocioException {
+		Medico medicoCadastrado = medicos.medicoCrm(medico.getCrm());
+		if(medicoCadastrado != null && !medicoCadastrado.equals(medico.getCrm())) {
+			throw new NegocioException("Médico já cadastrado.");
+		}
 		if (medico.getDataNascimento() != null && medico.getDataNascimento().after(new Date())) {
-			throw new NegocioException("Data de nascimento não pode ser futura à data atual");
+			throw new NegocioException("Data de nascimento não pode ser futura à data atual.");
 		}
 		this.medicos.guardar(medico);
 	}
