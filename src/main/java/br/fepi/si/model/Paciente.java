@@ -24,6 +24,7 @@ public class Paciente implements Serializable{
 	private String senha;
 	private GrupoEnum grupo;
 	private SexoEnum sexo;
+	private Date dataUltimoAcesso;
 	
 	@Id
 	@Column(name = "matricula")
@@ -81,6 +82,16 @@ public class Paciente implements Serializable{
 
 	public void setSexo(SexoEnum sexo) {
 		this.sexo = sexo;
+	}
+	
+	@Column(name="ultimo_acesso", unique = true)
+	@Temporal(TemporalType.DATE)
+	public Date getDataUltimoAcesso() {
+		return dataUltimoAcesso;
+	}
+
+	public void setDataUltimoAcesso(Date dataUltimoAcesso) {
+		this.dataUltimoAcesso = dataUltimoAcesso;
 	}
 
 	@Override
