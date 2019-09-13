@@ -2,15 +2,16 @@
 
 body {	
 	margin: 0px auto;	
-	width: 90%;	
+	width: 99%;	
 }
 
 header {
 	padding: 5px;
 	margin-bottom: 20px;
 	height: 70px;
-	background-color: #a8c1e2;
-	color: #fff;	
+	background-color: #0042b1;
+	color: #fff;
+	text-align: right;
 }
 
 #conteudo {
@@ -43,4 +44,10 @@ h1 {
 
 #panelGridCenter {
 	align: 0 auto;
+}
+
+#footer-brasil {
+   background: none repeat scroll 0% 0% #0042b1;
+   padding: 1em 0px;
+   max-width: 100%;
 }

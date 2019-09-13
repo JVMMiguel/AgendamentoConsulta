@@ -8,16 +8,41 @@
 <h:head>
 	<title><ui:insert name="titulo">Agendamento de Consultas</ui:insert>
 	</title>
+
 	<h:outputStylesheet library="css" name="estilo.css" />
 	<h:outputScript library="js" name="locale.js" />
+	<h:outputScript library="js" name="fonte.js" />
+
 </h:head>
-<h:body>
-	<header> </header>
+
+<h:body class="acessibilidade">
+
+	<div id="barra-brasil"
+		style="background: #7F7F7F; height: 20px; padding: 0 0 0 10px; display: block;">
+		<ul id="menu-barra-temp" style="list-style: none;">
+			<li style="display: inline; float: left; padding-right: 10px; margin-right: 10px; 
+			border-right: 1px solid #EDEDED">
+				<a href="http://brasil.gov.br"
+				style="font-family: sans, sans-serif; text-decoration: none; 
+				color: white;">Portal do Governo Brasileiro </a>
+			</li>
+			<li>
+			<a style="font-family: sans, sans-serif; text-decoration: none; color: white;"
+				href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo </a></li>
+		</ul>
+	</div>
+
+	<header>
+	<div>
+  		<p:commandButton value="A+" onclick="fonte('a');" />
+		<p:commandButton value="A-" onclick="fonte('d');" />
+	</div>
+	</header>
 
 	<h:form id="menu">
 		<p:menubar>
-			<p:menuitem value="Home" action="/Home?faces-redirect=true"/>
-			
+			<p:menuitem value="Home" action="/Home?faces-redirect=true" />
+
 			<p:submenu label="Consultas">
 				<p:menuitem value="Pacientes"
 					action="/ConsultaPacientes?faces-redirect=true" />
@@ -26,7 +51,7 @@
 				<p:menuitem value="Consultas"
 					action="/ConsultaConsultas?faces-redirect=true" />
 			</p:submenu>
-			
+
 			<p:submenu label="Cadastros">
 				<p:menuitem value="Pacientes"
 					action="/CadastroPacientes?faces-redirect=true" />
@@ -36,9 +61,10 @@
 					action="/CadastroConsultas?faces-redirect=true" />
 			</p:submenu>
 
-			<p:menuitem value="Sair" action="/Home?faces-redirect=true"/>
+			<p:menuitem value="Sair" action="/Home?faces-redirect=true" />
 
 		</p:menubar>
+
 	</h:form>
 
 	<div id="conteudo">
@@ -46,9 +72,12 @@
 	</div>
 
 	<footer>
-		<br /> Sistema de Agendamento de Consulta 
+		<div id="footer-brasil"></div>
 	</footer>
 
 </h:body>
+
+<script defer="defer" src="//barra.brasil.gov.br/barra.js"
+	type="text/javascript"></script>
 
 </html>
