@@ -18,6 +18,14 @@ public class Pacientes implements Serializable {
 		this.em = em;
 	}
 	
+	public List<Paciente> loginUsuario(Long matricula, String senha){
+		TypedQuery<Paciente> query = em.createQuery("SELECT p FROM Paciente p WHERE"
+				+ " p.matricula = :matricula and p.senha = :senha", Paciente.class)
+				.setParameter("matricula", matricula)
+				.setParameter("senha", senha);
+		return query.getResultList();
+	}
+	
 	public Paciente pacienteId (Long matricula) {
 		return em.find(Paciente.class, matricula);
 	}

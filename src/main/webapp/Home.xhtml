@@ -6,26 +6,40 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+	<f:metadata>
+		<f:viewParam name="id" value="#{loginBean.paciente}" />
+		<f:viewAction action="#{loginBean.prepararCadastro}" />
+	</f:metadata>
+
 	<ui:define name="titulo">Boas vindas</ui:define>
 
 	<ui:define name="corpo">
+
 		<h2 align="center">
 			Seja bem-vindo(a) ao Sistema de Agendamento de Consultas! <br /> <br />
 		</h2>
+
 		<h:form>
 			<p:messages showDetail="false" showSummary="true" />
 			<div align="center">
 				<p:panelGrid columns="2">
-					<p:outputLabel value="Matricula" style="text-align: center" />
-					<p:inputText />
-					<p:outputLabel value="Senha" style="text-align: center" />
-					<p:password />
-					<p:commandButton value="Login" style="text-align: center" />
+
+					<p:outputLabel value="Matricula" for="matricula"
+						style="text-align: center" />
+					<p:inputText id="matricula" value="#{loginBean.paciente.matricula}"
+						required="true" requiredMessage="Matricula obrigatória" />
+
+					<p:outputLabel value="Senha" for="senha" style="text-align: center" />
+					<p:password id="senha" value="#{loginBean.paciente.senha}"
+						required="true" requiredMessage="Senha obrigatória" />
+
+					<p:commandButton value="Login" action="#{loginBean.login}"
+						ajax="false" update="@form" style="text-align: center" />
+
 				</p:panelGrid>
-				<br />
-				Ainda não tem uma conta?
-				<p:commandButton value="Clique aqui!"
-					action="/CadastroPacientes?faces-redirect=true" />
+				<br /> <br />
+				<p:link href="CadastroPacientes.xhtml"
+					value="Ainda não tem uma conta? Clique aqui!" />
 			</div>
 			<br />
 		</h:form>

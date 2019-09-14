@@ -22,9 +22,9 @@ public class Paciente implements Serializable{
 	private String nome;
 	private Date dataNascimento;
 	private String senha;
+	private String telefone;
 	private GrupoEnum grupo;
 	private SexoEnum sexo;
-	private Date dataUltimoAcesso;
 	
 	@Id
 	@Column(name = "matricula")
@@ -63,6 +63,15 @@ public class Paciente implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	@Column(name = "telefone", nullable = false)
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "grupo", nullable = false)
@@ -82,16 +91,6 @@ public class Paciente implements Serializable{
 
 	public void setSexo(SexoEnum sexo) {
 		this.sexo = sexo;
-	}
-	
-	@Column(name="ultimo_acesso", unique = true)
-	@Temporal(TemporalType.DATE)
-	public Date getDataUltimoAcesso() {
-		return dataUltimoAcesso;
-	}
-
-	public void setDataUltimoAcesso(Date dataUltimoAcesso) {
-		this.dataUltimoAcesso = dataUltimoAcesso;
 	}
 
 	@Override

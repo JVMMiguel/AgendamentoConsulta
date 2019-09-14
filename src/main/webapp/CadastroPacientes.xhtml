@@ -24,17 +24,17 @@
 				<p:outputLabel value="Matricula" for="matricula" />
 				<p:inputText id="matricula"
 					value="#{cadastroPacienteBean.paciente.matricula}" required="true"
-					requiredMessage="Matrícula obrigatória" />
+					requiredMessage="Matrícula obrigatória!" />
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" value="#{cadastroPacienteBean.paciente.nome}"
-					required="true" requiredMessage="Nome obrigatório" />
+					required="true" requiredMessage="Nome obrigatório!" />
 
 				<p:outputLabel value="Data Nascimento" for="dataNascimento" />
 				<p:calendar id="dataNascimento"
 					value="#{cadastroPacienteBean.paciente.dataNascimento}"
 					pattern="dd/MM/yyyy" required="true" locale="pt_BR"
-					requiredMessage="Data de nascimento obrigatória" />
+					requiredMessage="Data de nascimento obrigatória!" />
 
 				<p:outputLabel value="Grupo" for="grupo" />
 				<p:selectOneMenu id="grupo"
@@ -42,7 +42,7 @@
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroPacienteBean.grupoPaciente}"
 						var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.descricao}"
-						required="true" requiredMessage="Grupo obrigatório" />
+						required="true" requiredMessage="Grupo obrigatório!" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Sexo" for="sexo" />
@@ -51,8 +51,13 @@
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroPacienteBean.sexoPaciente}"
 						var="sexo" itemValue="#{sexo}" itemLabel="#{sexo.descricao}"
-						required="true" requiredMessage="Sexo obrigatório" />
+						required="true" requiredMessage="Sexo obrigatório!" />
 				</p:selectOneMenu>
+				
+				<p:outputLabel value="Telefone celular" for="telefone" />
+				<p:inputMask mask="(99) 99999-9999" id="telefone" 
+					value="#{cadastroPacienteBean.paciente.telefone}" required="true"
+					requiredMessage="Telefone obrigatório!" />
 
 				<p:outputLabel value="Senha" for="senha" />
 				<p:password id="senha"
@@ -61,7 +66,7 @@
 					promptLabel="Entre com a sua senha"
 					weakLabel="Força da senha: fraca" goodLabel="Força da senha: média"
 					strongLabel="Força da senha: forte" match="confsenha"
-					validatorMessage="As senhas devem ser iguais" />
+					validatorMessage="As senhas devem ser iguais!" />
 
 				<p:outputLabel value="Repita a Senha" for="confsenha" />
 				<p:password id="confsenha"
