@@ -15,8 +15,8 @@
 
 </h:head>
 
-<h:body class="acessibilidade">
-
+<h:body>
+	<div class="acessibilidade">
 	<div id="barra-brasil"
 		style="background: #7F7F7F; height: 20px; padding: 0 0 0 10px; display: block;">
 		<ul id="menu-barra-temp" style="list-style: none;">
@@ -36,6 +36,7 @@
 	<div>
   		<p:commandButton value="A+" onclick="fonte('a');" />
 		<p:commandButton value="A-" onclick="fonte('d');" />
+		<p:commandButton value="N" onclick="fonte('n');" />
 	</div>
 	</header>
 
@@ -74,7 +75,7 @@
 	<footer>
 		<div id="footer-brasil"></div>
 	</footer>
-
+</div>
 </h:body>
 
 <script defer="defer" src="//barra.brasil.gov.br/barra.js"
