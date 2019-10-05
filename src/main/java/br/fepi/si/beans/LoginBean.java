@@ -10,6 +10,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.fepi.si.model.Paciente;
 import br.fepi.si.repository.Pacientes;
 import br.fepi.si.util.DataSource;
@@ -34,7 +36,7 @@ public class LoginBean implements Serializable {
 
 	public String login() throws IOException {
 		try {
-			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), paciente.getSenha());
+			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), DigestUtils.md5Hex(paciente.getSenha()));
 			if (lista_pacientes.isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Usuário ou senha incorretos!", "Erro de login!"));
@@ -50,6 +52,12 @@ public class LoginBean implements Serializable {
 		pacientes = null;
 		lista_pacientes = null;
 		return "/Home?faces-redirect=true";
+	}
+	
+	public boolean isAdministrador() {
+		if(!paciente.getFuncao().equals("Administrador"))
+			return false;
+		return true;
 	}
 
 	public Paciente getPaciente() {

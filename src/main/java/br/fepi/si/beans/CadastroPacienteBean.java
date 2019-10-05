@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.fepi.si.model.GrupoEnum;
 import br.fepi.si.model.Paciente;
 import br.fepi.si.model.SexoEnum;
@@ -39,6 +41,7 @@ public class CadastroPacienteBean implements Serializable {
 		try {
 			et.begin();
 			CadastroPacientes cadastro = new CadastroPacientes(new Pacientes(em));
+			paciente.setSenha(DigestUtils.md5Hex(paciente.getSenha()));	
 			cadastro.salvar(paciente);
 			this.paciente = new Paciente();
 			faces.addMessage(null, new FacesMessage("Salvo com sucesso"));
