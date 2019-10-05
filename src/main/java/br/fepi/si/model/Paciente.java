@@ -23,6 +23,7 @@ public class Paciente implements Serializable{
 	private Date dataNascimento;
 	private String senha;
 	private String telefone;
+	private String funcao;
 	private GrupoEnum grupo;
 	private SexoEnum sexo;
 	
@@ -71,6 +72,15 @@ public class Paciente implements Serializable{
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	@Column(name = "funcao", nullable = true)
+	public String getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
 	}
 
 	@Enumerated(EnumType.STRING)

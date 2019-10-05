@@ -17,65 +17,73 @@
 
 <h:body>
 	<div class="acessibilidade">
-	<div id="barra-brasil"
-		style="background: #7F7F7F; height: 20px; padding: 0 0 0 10px; display: block;">
-		<ul id="menu-barra-temp" style="list-style: none;">
-			<li style="display: inline; float: left; padding-right: 10px; margin-right: 10px; 
-			border-right: 1px solid #EDEDED">
-				<a href="http://brasil.gov.br"
-				style="font-family: sans, sans-serif; text-decoration: none; 
-				color: white;">Portal do Governo Brasileiro </a>
-			</li>
-			<li>
-			<a style="font-family: sans, sans-serif; text-decoration: none; color: white;"
-				href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo </a></li>
-		</ul>
+		<div id="barra-brasil"
+			style="background: #7F7F7F; height: 20px; padding: 0 0 0 10px; display: block;">
+			<ul id="menu-barra-temp" style="list-style: none;">
+				<li
+					style="display: inline; float: left; padding-right: 10px; margin-right: 10px; border-right: 1px solid #EDEDED">
+					<a href="http://brasil.gov.br"
+					style="font-family: sans, sans-serif; text-decoration: none; color: white;">Portal
+						do Governo Brasileiro </a>
+				</li>
+				<li><a
+					style="font-family: sans, sans-serif; text-decoration: none; color: white;"
+					href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize
+						sua Barra de Governo </a></li>
+			</ul>
+		</div>
+
+		<header>
+			<div>
+				<p:commandButton value="A+" onclick="fonte('a');" />
+				<p:commandButton value="A-" onclick="fonte('d');" />
+				<p:commandButton value="N" onclick="fonte('n');" />
+			</div>
+		</header>
+
+		<h:form id="menu">
+			<p:menubar>
+				<p:menuitem value="Home" action="/Home?faces-redirect=true" />
+
+				<p:submenu label="Consultas"
+					rendered="#{loginBean.paciente.funcao != null}">
+					<p:menuitem value="Pacientes"
+						action="/ConsultaPacientes?faces-redirect=true"
+						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+					<p:menuitem value="Médicos"
+						action="/ConsultaMedicos?faces-redirect=true"
+						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+					<p:menuitem value="Agendamentos"
+						action="/ConsultaConsultas?faces-redirect=true" />
+				</p:submenu>
+
+				<p:submenu label="Cadastros"
+					rendered="#{loginBean.paciente.funcao != null}">
+					<p:menuitem value="Pacientes"
+						action="/CadastroPacientes?faces-redirect=true"
+						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+					<p:menuitem value="Médicos"
+						action="/CadastroMedicos?faces-redirect=true"
+						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+					<p:menuitem value="Consultas"
+						action="/CadastroConsultas?faces-redirect=true" />
+				</p:submenu>
+
+				<p:menuitem value="Sair" action="#{loginBean.logout}"
+					rendered="#{loginBean.paciente.funcao != null}" update="@form" />
+
+			</p:menubar>
+
+		</h:form>
+
+		<div id="conteudo">
+			<ui:insert name="corpo" />
+		</div>
+
+		<footer>
+			<div id="footer-brasil"></div>
+		</footer>
 	</div>
-
-	<header>
-	<div>
-  		<p:commandButton value="A+" onclick="fonte('a');" />
-		<p:commandButton value="A-" onclick="fonte('d');" />
-		<p:commandButton value="N" onclick="fonte('n');" />
-	</div>
-	</header>
-
-	<h:form id="menu">
-		<p:menubar>
-			<p:menuitem value="Home" action="/Home?faces-redirect=true" />
-
-			<p:submenu label="Consultas">
-				<p:menuitem value="Pacientes"
-					action="/ConsultaPacientes?faces-redirect=true" />
-				<p:menuitem value="Médicos"
-					action="/ConsultaMedicos?faces-redirect=true" />
-				<p:menuitem value="Consultas"
-					action="/ConsultaConsultas?faces-redirect=true" />
-			</p:submenu>
-
-			<p:submenu label="Cadastros">
-				<p:menuitem value="Pacientes"
-					action="/CadastroPacientes?faces-redirect=true" />
-				<p:menuitem value="Médicos"
-					action="/CadastroMedicos?faces-redirect=true" />
-				<p:menuitem value="Consultas"
-					action="/CadastroConsultas?faces-redirect=true" />
-			</p:submenu>
-
-			<p:menuitem value="Sair" action="/Home?faces-redirect=true" />
-
-		</p:menubar>
-
-	</h:form>
-
-	<div id="conteudo">
-		<ui:insert name="corpo" />
-	</div>
-
-	<footer>
-		<div id="footer-brasil"></div>
-	</footer>
-</div>
 </h:body>
 
 <script defer="defer" src="//barra.brasil.gov.br/barra.js"

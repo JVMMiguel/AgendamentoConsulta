@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
+
 /**
  * Cria uma instância EntityManager compartilhada na aplicação
  * @author joaovittor
@@ -23,12 +24,15 @@ public class DataSource {
 	/**
 	 * Teste de conexão com o banco
 	 */
-	/*public static void main(String[] args) {
+	
+	/*
+	public static void main(String[] args) {
 		try {
 			Persistence.createEntityManagerFactory("AgendamentoPU");
 			System.out.println("Conectado com sucesso!");
 		}catch (HibernateException e){
 			System.out.println("Falha na conexão: " + e.getMessage());
 		}
-	}*/
+	}
+	*/
 }

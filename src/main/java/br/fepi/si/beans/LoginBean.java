@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 
@@ -15,33 +15,41 @@ import br.fepi.si.repository.Pacientes;
 import br.fepi.si.util.DataSource;
 
 @ManagedBean
-@ViewScoped
-public class LoginBean implements Serializable{
+@SessionScoped
+public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Paciente paciente = new Paciente();
 	private List<Paciente> lista_pacientes;
-	
+
 	EntityManager em = DataSource.getEntityManager();
 	private Pacientes pacientes = new Pacientes(em);
-	
+
 	public void prepararCadastro() {
 		if (this.paciente == null) {
 			this.paciente = new Paciente();
 		}
 	}
-	
+
 	public String login() throws IOException {
-		lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), paciente.getSenha());
-		if(lista_pacientes.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-					"Usuário ou senha incorretos!", "Erro de login!"));
-			return null;
+		try {
+			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), paciente.getSenha());
+			if (lista_pacientes.isEmpty()) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Usuário ou senha incorretos!", "Erro de login!"));
+				return null;
+			} 
+		} catch (Exception e) {
 		}
-		else {
-			return "/ConsultaConsultas?faces-redirect=true";
-		}
+		return "/ConsultaConsultas?faces-redirect=true";
+	}
+	
+	public String logout() {
+		paciente = null;
+		pacientes = null;
+		lista_pacientes = null;
+		return "/Home?faces-redirect=true";
 	}
 
 	public Paciente getPaciente() {
@@ -59,7 +67,7 @@ public class LoginBean implements Serializable{
 	public void setLista_pacientes(List<Paciente> lista_pacientes) {
 		this.lista_pacientes = lista_pacientes;
 	}
-	
+
 	public EntityManager getEm() {
 		return em;
 	}
