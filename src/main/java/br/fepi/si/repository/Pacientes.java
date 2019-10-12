@@ -26,14 +26,6 @@ public class Pacientes implements Serializable {
 		return query.getResultList();
 	}
 	
-	public List<Paciente> loginUsuarioFuncao(Long matricula, String funcao) {
-		TypedQuery<Paciente> query = em.createQuery("SELECT p FROM Paciente p WHERE"
-		+ " p.matricula = :matricula and p.funcao = :funcao", Paciente.class)
-		.setParameter("matricula", matricula)
-		.setParameter("funcao", funcao);
-		return query.getResultList();
-	}
-	
 	public List<Paciente> userLogado(String nomeUsuario)
 	{
 		TypedQuery<Paciente> query = em.createQuery(
