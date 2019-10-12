@@ -9,9 +9,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import br.fepi.si.model.FuncaoEnum;
 import br.fepi.si.model.Paciente;
 import br.fepi.si.repository.Pacientes;
 import br.fepi.si.util.DataSource;
@@ -39,25 +41,35 @@ public class LoginBean implements Serializable {
 			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), DigestUtils.md5Hex(paciente.getSenha()));
 			if (lista_pacientes.isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Usuário ou senha incorretos!", "Erro de login!"));
+						"Usuário, tipo de usuário ou senha incorretos!", "Erro de login!"));
 				return null;
-			} 
+
+			} else {
+				HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+						.getSession(false);
+				if (session != null) {
+					session.setAttribute("paciente", lista_pacientes);
+				}
+			}
+
 		} catch (Exception e) {
+
 		}
+
 		return "/ConsultaConsultas?faces-redirect=true";
 	}
-	
+
 	public String logout() {
-		paciente = null;
-		pacientes = null;
-		lista_pacientes = null;
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+		session.invalidate();
 		return "/Home?faces-redirect=true";
 	}
-	
+
 	public boolean isAdministrador() {
-		if(!paciente.getFuncao().equals("Administrador"))
-			return false;
-		return true;
+		if (this.paciente.getFuncao().equals("ADMINISTRADOR"))
+			return true;
+		return false;
 	}
 
 	public Paciente getPaciente() {
@@ -91,5 +103,8 @@ public class LoginBean implements Serializable {
 	public void setPacientes(Pacientes pacientes) {
 		this.pacientes = pacientes;
 	}
-
+	
+	public FuncaoEnum[] getFuncaoEnum() {
+		return FuncaoEnum.values();
+	}
 }

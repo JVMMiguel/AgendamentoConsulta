@@ -16,13 +16,23 @@
 	<ui:define name="corpo">
 
 		<h2 align="center">
-			Seja bem-vindo(a) ao Sistema de Agendamento de Consultass! <br /> <br />
+			Seja bem-vindo(a) ao Sistema de Agendamento de Consultas! <br /> <br />
 		</h2>
 
 		<h:form>
 			<p:messages showDetail="false" showSummary="true" />
 			<div align="center">
 				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Tipo de Usuário" for="funcao" />
+					<p:selectOneMenu id="funcao"
+						value="#{loginBean.paciente.funcao}" required="true">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{loginBean.funcaoEnum}"
+							var="funcao" itemValue="#{crmEstado}"
+							itemLabel="#{funcao.descricao}" required="true"
+							requiredMessage="Estado do CRM obrigatório" />
+					</p:selectOneMenu>
 
 					<p:outputLabel value="Matricula" for="matricula"
 						style="text-align: center" />
@@ -34,7 +44,7 @@
 						required="true" requiredMessage="Senha obrigatória" />
 
 					<p:commandButton value="Login" action="#{loginBean.login}"
-						  update="@all :menu:menuOpcoes" ajax="false" style="text-align: center" />
+						style="text-align: center" update="@form" />
 
 				</p:panelGrid>
 				<br /> <br />

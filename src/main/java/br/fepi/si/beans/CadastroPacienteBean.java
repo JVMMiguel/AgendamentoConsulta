@@ -41,7 +41,8 @@ public class CadastroPacienteBean implements Serializable {
 		try {
 			et.begin();
 			CadastroPacientes cadastro = new CadastroPacientes(new Pacientes(em));
-			paciente.setSenha(DigestUtils.md5Hex(paciente.getSenha()));	
+			paciente.setSenha(DigestUtils.md5Hex(paciente.getSenha()));
+			paciente.setFuncao("Paciente");
 			cadastro.salvar(paciente);
 			this.paciente = new Paciente();
 			faces.addMessage(null, new FacesMessage("Salvo com sucesso"));
