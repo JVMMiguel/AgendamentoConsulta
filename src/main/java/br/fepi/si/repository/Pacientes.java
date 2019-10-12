@@ -18,11 +18,12 @@ public class Pacientes implements Serializable {
 		this.em = em;
 	}
 
-	public List<Paciente> loginUsuario(Long matricula, String senha) {
+	public List<Paciente> loginUsuario(Long matricula, String senha, String funcao) {
 		TypedQuery<Paciente> query = em.createQuery("SELECT p FROM Paciente p WHERE"
-		+ " p.matricula = :matricula and p.senha = :senha", Paciente.class)
+		+ " p.matricula = :matricula and p.senha = :senha and p.funcao = :funcao", Paciente.class)
 		.setParameter("matricula", matricula)
-		.setParameter("senha", senha);
+		.setParameter("senha", senha)
+		.setParameter("funcao", funcao);
 		return query.getResultList();
 	}
 	

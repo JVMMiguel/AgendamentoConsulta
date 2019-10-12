@@ -38,7 +38,8 @@ public class LoginBean implements Serializable {
 
 	public String login() throws IOException {
 		try {
-			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), DigestUtils.md5Hex(paciente.getSenha()));
+			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), 
+					DigestUtils.md5Hex(paciente.getSenha()), paciente.getFuncao());
 			if (lista_pacientes.isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Usuário, tipo de usuário ou senha incorretos!", "Erro de login!"));
