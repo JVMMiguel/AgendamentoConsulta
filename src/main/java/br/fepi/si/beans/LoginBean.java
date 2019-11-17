@@ -25,6 +25,7 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Paciente paciente = new Paciente();
+	private Paciente pacienteLogado;
 	private List<Paciente> lista_pacientes;
 
 	EntityManager em = DataSource.getEntityManager();
@@ -37,9 +38,10 @@ public class LoginBean implements Serializable {
 	}
 
 	public String login() throws IOException {
-		try {
+		
 			lista_pacientes = pacientes.loginUsuario(paciente.getMatricula(), 
 					DigestUtils.md5Hex(paciente.getSenha()), paciente.getFuncao());
+			
 			if (lista_pacientes.isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Usuário, tipo de usuário ou senha incorretos!", "Erro de login!"));
@@ -53,10 +55,6 @@ public class LoginBean implements Serializable {
 				}
 			}
 
-		} catch (Exception e) {
-
-		}
-
 		return "/ConsultaConsultas?faces-redirect=true";
 	}
 
@@ -66,11 +64,20 @@ public class LoginBean implements Serializable {
 		session.invalidate();
 		return "/Home?faces-redirect=true";
 	}
+	
+	public Paciente getPacienteLogado() {
+		if(pacienteLogado == null) {
+			pacienteLogado = new Paciente();
+		}
+		return pacienteLogado;
+	}
 
 	public boolean isAdministrador() {
-		if (this.paciente.getFuncao().equals("ADMINISTRADOR"))
+		if (this.paciente.getFuncao().equals("ADMINISTRADOR")) {
 			return true;
-		return false;
+		} else {
+			return false;
+		}
 	}
 
 	public Paciente getPaciente() {

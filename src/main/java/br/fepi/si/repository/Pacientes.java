@@ -27,14 +27,14 @@ public class Pacientes implements Serializable {
 		return query.getResultList();
 	}
 	
-	public List<Paciente> userLogado(String nomeUsuario)
+	public List<Paciente> userLogado(String nome)
 	{
 		TypedQuery<Paciente> query = em.createQuery(
 		"SELECT p FROM Paciente p WHERE p.nome = :nome", Paciente.class)
-		.setParameter("nome", nomeUsuario);
+		.setParameter("nome", nome);
 		return query.getResultList();
 	}
-
+	
 	public Paciente pacienteId(Long matricula) {
 		return em.find(Paciente.class, matricula);
 	}

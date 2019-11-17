@@ -51,10 +51,10 @@
 					rendered="#{loginBean.paciente.funcao != null}">
 					<p:menuitem value="Pacientes"
 						action="/ConsultaPacientes?faces-redirect=true"
-						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+						rendered="#{loginBean.administrador}" />
 					<p:menuitem value="Médicos"
 						action="/ConsultaMedicos?faces-redirect=true"
-						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+						rendered="#{loginBean.administrador}" />
 					<p:menuitem value="Agendamentos"
 						action="/ConsultaConsultas?faces-redirect=true" />
 				</p:submenu>
@@ -63,10 +63,10 @@
 					rendered="#{loginBean.paciente.funcao != null}">
 					<p:menuitem value="Pacientes"
 						action="/CadastroPacientes?faces-redirect=true"
-						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+						rendered="#{loginBean.administrador}" />
 					<p:menuitem value="Médicos"
 						action="/CadastroMedicos?faces-redirect=true"
-						rendered="#{loginBean.paciente.funcao != 'Paciente'}" />
+						rendered="#{loginBean.administrador}" />
 					<p:menuitem value="Consultas"
 						action="/CadastroConsultas?faces-redirect=true" />
 				</p:submenu>
